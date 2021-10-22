@@ -1,5 +1,6 @@
 import {
   formatFiles,
+  generateFiles,
   joinPathFragments,
   names,
   readProjectConfiguration,
@@ -45,21 +46,20 @@ export default async function (
   });
 
   const stencilProjectPath = joinPathFragments('libs', 'stencil', schema.name);
+  const sourceRoot = joinPathFragments(stencilProjectPath, 'src');
 
   // delete the utils folder
-  tree.delete(joinPathFragments(stencilProjectPath, 'src', 'utils'));
+  tree.delete(joinPathFragments(sourceRoot, 'utils'));
 
   // simplify the component path and file names
   const oldComponentPath = joinPathFragments(
-    stencilProjectPath,
-    'src',
+    sourceRoot,
     'components',
     componentName,
   );
 
   const newComponentPath = joinPathFragments(
-    stencilProjectPath,
-    'src',
+    sourceRoot,
     'components',
     schema.name,
   );
@@ -103,18 +103,30 @@ export default async function (
 
   // update the components.d.ts file
   tree.write(
-    joinPathFragments(stencilProjectPath, 'src', 'components.d.ts'),
+    joinPathFragments(sourceRoot, 'components.d.ts'),
     `export * from './components/${schema.name}/${schema.name}';`,
   );
 
   // update the index.html file to correct the tag name
-  const indexPath = joinPathFragments(stencilProjectPath, 'src', 'index.html');
+  const indexPath = joinPathFragments(sourceRoot, 'index.html');
   tree.write(
     indexPath,
     tree
       .read(indexPath)
       .toString()
       .replace(/my-component/g, componentName),
+  );
+
+  // replace the component script
+  generateFiles(
+    tree,
+    joinPathFragments(__dirname, './files/component'),
+    joinPathFragments(`${sourceRoot}/components/${componentName}`),
+    {
+      componentFileName: schema.name,
+      className: names(schema.name).className,
+      tagName: componentName,
+    },
   );
 
   // create the Angular build target
