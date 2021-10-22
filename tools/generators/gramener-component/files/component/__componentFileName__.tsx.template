@@ -1,4 +1,4 @@
-import { Component, h, Prop, ComponentInterface } from '@stencil/core';
+import { Component, h, ComponentInterface } from '@stencil/core';
 
 @Component({
   tag: '<%= componentTag %>',
