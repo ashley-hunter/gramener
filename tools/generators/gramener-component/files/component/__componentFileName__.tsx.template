@@ -1,0 +1,13 @@
+import { Component, h, Prop, ComponentInterface } from '@stencil/core';
+
+@Component({
+  tag: '<%= componentTag %>',
+  styleUrl: '<%= componentFileName %>.css',
+  shadow: false,
+  scoped: true
+})
+export class <%= className %> implements ComponentInterface {
+  render() {
+    return <div>Hello, World!</div>;
+  }
+}

@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
-  "$id": "component-library",
+  "$id": "gramener-library",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "The name of the component library",
-      "x-prompt": "What should the component library be called?",
+      "description": "The name of the library",
+      "x-prompt": "What should the library be called?",
       "$default": {
         "$source": "argv",
         "index": 0
