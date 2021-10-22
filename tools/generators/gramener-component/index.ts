@@ -13,6 +13,9 @@ export default async function gramenerComponentGenerator(
 ): Promise<void> {
   const normalizedSchema = normalizeSchema(schema);
   await generateComponent(tree, normalizedSchema);
+
+  // update the components.d.ts to export the component
+  updateExportFile(tree, schema);
 }
 
 function normalizeSchema(
@@ -29,6 +32,22 @@ function normalizeSchema(
     componentFileName,
     className,
   };
+}
+
+function updateExportFile(tree: Tree, schema: GramenerComponentSchema) {
+  const projectConfig = readProjectConfiguration(tree, schema.project);
+
+  const componentExportPath = joinPathFragments(
+    projectConfig.sourceRoot,
+    'components.d.ts',
+  );
+
+  const componentExport = [
+    ...tree.read(componentExportPath).toString().split('\n'),
+    `export * from './components/${schema.name}/${schema.name}';`,
+  ].join('\n');
+
+  tree.write(componentExportPath, componentExport);
 }
 
 async function generateComponent(
