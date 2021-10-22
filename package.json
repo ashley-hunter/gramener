@@ -5,17 +5,20 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "generate:component-library": "nx workspace-generator component-library --dry-run"
   },
   "private": true,
   "dependencies": {},
   "devDependencies": {
     "@nrwl/angular": "^13.0.1",
     "@nrwl/cli": "13.0.1",
+    "@nrwl/devkit": "13.0.1",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/react": "^13.0.1",
     "@nrwl/tao": "13.0.1",
     "@nrwl/workspace": "13.0.1",
+    "@nx-plus/vue": "^12.2.0",
     "@nxext/stencil": "^13.0.0",
     "@types/node": "14.14.33",
     "prettier": "^2.3.1",
