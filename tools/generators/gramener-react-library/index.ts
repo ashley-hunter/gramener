@@ -90,7 +90,7 @@ function addReactOutputTarget(
 ) {
   const reactProjectConfig = readProjectConfiguration(
     tree,
-    `${projectName}-react`,
+    `react-${projectName}`,
   );
   const relativePath = getRelativePath(
     getDistDir(stencilProjectConfig.root),
