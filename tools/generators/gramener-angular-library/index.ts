@@ -60,6 +60,7 @@ async function createAngularLibrary(
     skipFormat: true,
     publishable: true,
     importPath: `@gramener-angular/${schema.project}`,
+    simpleModuleName: true,
   });
 
   addDependenciesToPackageJson(
@@ -71,8 +72,8 @@ async function createAngularLibrary(
   );
 
   const angularProjectName = 'angular-' + schema.project;
-  const angularModuleFilename = names(angularProjectName).fileName;
-  const angularModulePath = `${libsDir}/${angularProjectName}/src/lib/${angularModuleFilename}.module.ts`;
+  const angularModuleFilename = names(schema.project).fileName;
+  const angularModulePath = `${libsDir}/angular/${schema.project}/src/lib/${angularModuleFilename}.module.ts`;
   const angularModuleSource = readTsSourceFile(host, angularModulePath);
   const packageName = `@${npmScope}/${schema.project}`;
 
@@ -104,7 +105,7 @@ function addAngularOutputTarget(
 ) {
   const angularProjectConfig = readProjectConfiguration(
     host,
-    `${projectName}-angular`,
+    `angular-${projectName}`,
   );
   const relativePath = relative(
     getDistDir(stencilProjectConfig.root),
