@@ -121,7 +121,7 @@ export default async function (
   generateFiles(
     tree,
     joinPathFragments(__dirname, './files/component'),
-    joinPathFragments(`${sourceRoot}/components/${componentName}`),
+    joinPathFragments(`${sourceRoot}/components/${schema.name}`),
     {
       componentFileName: schema.name,
       className: names(schema.name).className,
