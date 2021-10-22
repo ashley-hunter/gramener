@@ -44,20 +44,21 @@ export default async function (
     project: schema.name,
   });
 
+  const stencilProjectPath = joinPathFragments('libs', 'stencil', schema.name);
+
+  // delete the utils folder
+  tree.delete(joinPathFragments(stencilProjectPath, 'src', 'utils'));
+
   // simplify the component path and file names
   const oldComponentPath = joinPathFragments(
-    'libs',
-    'stencil',
-    schema.name,
+    stencilProjectPath,
     'src',
     'components',
     componentName,
   );
 
   const newComponentPath = joinPathFragments(
-    'libs',
-    'stencil',
-    schema.name,
+    stencilProjectPath,
     'src',
     'components',
     schema.name,
@@ -86,13 +87,21 @@ export default async function (
     importPath: `@gramener/${schema.name}`,
   });
 
+  // delete the license files
+  tree.delete(joinPathFragments(stencilProjectPath, 'LICENSE'));
+
   // update the serve task to use development mode
   const configuration = readProjectConfiguration(tree, schema.name);
 
   configuration.targets.serve.options.dev = true;
   configuration.targets.serve.options.debug = true;
 
+  // delete e2e target
+  delete configuration.targets.e2e;
+
   updateProjectConfiguration(tree, schema.name, configuration);
+
+  // update the components.d.ts file
 
   // create the Angular build target
 
