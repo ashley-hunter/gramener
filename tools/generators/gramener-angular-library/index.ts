@@ -52,11 +52,11 @@ async function createAngularLibrary(
   host: Tree,
   schema: GramenerAngularLibrarySchema,
 ) {
-  const angularProjectName = `${schema.project}-angular`;
   const { libsDir, npmScope } = getWorkspaceLayout(host);
 
   await libraryGenerator(host, {
-    name: angularProjectName,
+    name: schema.project,
+    directory: 'angular',
     skipFormat: true,
     publishable: true,
     importPath: `@gramener-angular/${schema.project}`,
@@ -70,6 +70,7 @@ async function createAngularLibrary(
     },
   );
 
+  const angularProjectName = 'angular-' + schema.project;
   const angularModuleFilename = names(angularProjectName).fileName;
   const angularModulePath = `${libsDir}/${angularProjectName}/src/lib/${angularModuleFilename}.module.ts`;
   const angularModuleSource = readTsSourceFile(host, angularModulePath);
