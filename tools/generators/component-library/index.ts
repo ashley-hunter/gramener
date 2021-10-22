@@ -133,12 +133,13 @@ export default async function (
   const specPath = joinPathFragments(
     sourceRoot,
     'components',
+    schema.name,
     schema.name + '.spec.tsx',
   );
   const specFile = tree.read(specPath).toString();
   tree.write(
     specPath,
-    specPath.replace(`./gramener-${schema.name}`, `./${schema.name}`),
+    specFile.replace(`./gramener-${schema.name}`, `./${schema.name}`),
   );
 
   // create the Angular build target
