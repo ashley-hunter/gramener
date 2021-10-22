@@ -12,6 +12,7 @@ import { Linter } from '@nrwl/linter';
 import { SupportedStyles } from '@nxext/stencil/src/stencil-core-utils';
 import gramenerComponentGenerator from '../gramener-component';
 import { load } from 'cheerio';
+import gramenerAngularLibraryGenerator from '../gramener-angular-library';
 
 export default async function gramenerLibraryGenerator(
   tree: Tree,
@@ -36,6 +37,11 @@ export default async function gramenerLibraryGenerator(
 
   // update the index.html file to update the tag name to match the generated component
   updateIndexHtml(tree, normalizedSchema);
+
+  // add the Angular output target
+  await gramenerAngularLibraryGenerator(tree, {
+    project: normalizedSchema.libraryName,
+  });
 
   await formatFiles(tree);
 }
