@@ -13,6 +13,7 @@ import { SupportedStyles } from '@nxext/stencil/src/stencil-core-utils';
 import gramenerComponentGenerator from '../gramener-component';
 import { load } from 'cheerio';
 import gramenerAngularLibraryGenerator from '../gramener-angular-library';
+import gramenerReactLibraryGenerator from '../gramener-react-library';
 
 export default async function gramenerLibraryGenerator(
   tree: Tree,
@@ -40,6 +41,11 @@ export default async function gramenerLibraryGenerator(
 
   // add the Angular output target
   await gramenerAngularLibraryGenerator(tree, {
+    project: normalizedSchema.libraryName,
+  });
+
+  // add the React output target
+  await gramenerReactLibraryGenerator(tree, {
     project: normalizedSchema.libraryName,
   });
 
