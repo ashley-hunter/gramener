@@ -13,6 +13,7 @@ import {
   libraryGenerator,
   makeLibBuildableGenerator,
 } from '@nxext/stencil';
+import { addAngularGenerator } from '@nxext/stencil/src/generators/add-outputtarget/add-angular/generator';
 import { SupportedStyles } from '@nxext/stencil/src/stencil-core-utils';
 import { ComponentLibrarySchema } from './schema';
 
@@ -143,6 +144,13 @@ export default async function (
   );
 
   // create the Angular build target
+  await addAngularGenerator(tree, {
+    publishable: false,
+    outputType: 'angular',
+    projectName: schema.name,
+    unitTestRunner: 'jest',
+    skipFormat: false,
+  });
 
   // format the files with prettier to ensure they follow the code style convention
   await formatFiles(tree);
