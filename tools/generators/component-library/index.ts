@@ -102,6 +102,20 @@ export default async function (
   updateProjectConfiguration(tree, schema.name, configuration);
 
   // update the components.d.ts file
+  tree.write(
+    joinPathFragments(stencilProjectPath, 'src', 'components.d.ts'),
+    `export * from './components/${schema.name}/${schema.name}';`,
+  );
+
+  // update the index.html file to correct the tag name
+  const indexPath = joinPathFragments(stencilProjectPath, 'src', 'index.html');
+  tree.write(
+    indexPath,
+    tree
+      .read(indexPath)
+      .toString()
+      .replace(/my-component/g, componentName),
+  );
 
   // create the Angular build target
 
