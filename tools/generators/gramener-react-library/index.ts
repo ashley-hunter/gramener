@@ -57,7 +57,7 @@ async function createReactLibrary(
     publishable: true,
     component: false,
     directory: 'react',
-    importPath: `@gramener-angular/${schema.project}`,
+    importPath: `@gramener-react/${schema.project}`,
     skipTsConfig: false,
     skipFormat: true,
     unitTestRunner: 'jest',
