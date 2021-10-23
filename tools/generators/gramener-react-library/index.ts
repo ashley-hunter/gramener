@@ -95,6 +95,7 @@ function addReactOutputTarget(
   );
 
   reactProjectConfig.targets.build.options.external.push('react', 'react-dom');
+  reactProjectConfig.implicitDependencies = [projectName];
   updateProjectConfiguration(tree, `react-${projectName}`, reactProjectConfig);
 
   const relativePath = getRelativePath(
