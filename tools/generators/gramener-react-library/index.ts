@@ -5,20 +5,21 @@ import {
   getWorkspaceLayout,
   readProjectConfiguration,
   Tree,
+  updateProjectConfiguration,
 } from '@nrwl/devkit';
-import { GramenerReactLibrarySchema } from './schema';
+import { Linter } from '@nrwl/linter';
+import { libraryGenerator } from '@nrwl/react';
+import { calculateStencilSourceOptions } from '@nxext/stencil/src/generators/add-outputtarget/lib/calculate-stencil-source-options';
 import { addOutputTarget } from '@nxext/stencil/src/stencil-core-utils';
+import { addImport } from '@nxext/stencil/src/utils/ast-utils';
 import {
   getDistDir,
   getRelativePath,
 } from '@nxext/stencil/src/utils/fileutils';
 import { addToGitignore } from '@nxext/stencil/src/utils/utillities';
 import { STENCIL_OUTPUTTARGET_VERSION } from '@nxext/stencil/src/utils/versions';
-import { libraryGenerator } from '@nrwl/react';
-import { Linter } from '@nrwl/linter';
 import * as ts from 'typescript';
-import { addImport } from '@nxext/stencil/src/utils/ast-utils';
-import { calculateStencilSourceOptions } from '@nxext/stencil/src/generators/add-outputtarget/lib/calculate-stencil-source-options';
+import { GramenerReactLibrarySchema } from './schema';
 
 export default async function gramenerReactLibraryGenerator(
   tree: Tree,
@@ -78,6 +79,10 @@ async function createReactLibrary(
   );
 
   addToGitignore(tree, `${libsDir}/react/${schema.project}/**/generated`);
+
+  const config = readProjectConfiguration(tree, schema.project);
+  config.targets.build.options.external.push('react', 'react-dom');
+  updateProjectConfiguration(tree, schema.project, config);
 }
 
 function addReactOutputTarget(
