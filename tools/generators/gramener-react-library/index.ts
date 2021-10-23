@@ -79,10 +79,6 @@ async function createReactLibrary(
   );
 
   addToGitignore(tree, `${libsDir}/react/${schema.project}/**/generated`);
-
-  const config = readProjectConfiguration(tree, schema.project);
-  config.targets.build.options.external.push('react', 'react-dom');
-  updateProjectConfiguration(tree, schema.project, config);
 }
 
 function addReactOutputTarget(
@@ -97,6 +93,10 @@ function addReactOutputTarget(
     tree,
     `react-${projectName}`,
   );
+
+  reactProjectConfig.targets.build.options.external.push('react', 'react-dom');
+  updateProjectConfiguration(tree, `react-${projectName}`, reactProjectConfig);
+
   const relativePath = getRelativePath(
     getDistDir(stencilProjectConfig.root),
     reactProjectConfig.root,
