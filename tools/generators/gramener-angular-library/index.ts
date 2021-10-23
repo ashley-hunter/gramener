@@ -1,3 +1,4 @@
+import { libraryGenerator } from '@nrwl/angular/generators';
 import {
   addDependenciesToPackageJson,
   applyChangesToString,
@@ -7,21 +8,21 @@ import {
   names,
   readProjectConfiguration,
   Tree,
+  updateProjectConfiguration,
 } from '@nrwl/devkit';
-import { GramenerAngularLibrarySchema } from './schema';
-import { libraryGenerator } from '@nrwl/angular/generators';
-import { STENCIL_OUTPUTTARGET_VERSION } from '@nxext/stencil/src/utils/versions';
+import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
+import { calculateStencilSourceOptions } from '@nxext/stencil/src/generators/add-outputtarget/lib/calculate-stencil-source-options';
+import { addOutputTarget } from '@nxext/stencil/src/stencil-core-utils';
 import {
   addImport,
   readTsSourceFile,
 } from '@nxext/stencil/src/utils/ast-utils';
-import { addToGitignore } from '@nxext/stencil/src/utils/utillities';
-import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
-import { relative } from 'path';
 import { getDistDir } from '@nxext/stencil/src/utils/fileutils';
-import { addOutputTarget } from '@nxext/stencil/src/stencil-core-utils';
+import { addToGitignore } from '@nxext/stencil/src/utils/utillities';
+import { STENCIL_OUTPUTTARGET_VERSION } from '@nxext/stencil/src/utils/versions';
+import { relative } from 'path';
 import * as ts from 'typescript';
-import { calculateStencilSourceOptions } from '@nxext/stencil/src/generators/add-outputtarget/lib/calculate-stencil-source-options';
+import { GramenerAngularLibrarySchema } from './schema';
 
 export default async function gramenerAngularLibraryGenerator(
   tree: Tree,
@@ -107,6 +108,19 @@ function addAngularOutputTarget(
     host,
     `angular-${projectName}`,
   );
+
+  angularProjectConfig.targets.build.dependsOn = [
+    {
+      target: 'build',
+      projects: 'dependencies',
+    },
+  ];
+  updateProjectConfiguration(
+    host,
+    `angular-${projectName}`,
+    angularProjectConfig,
+  );
+
   const relativePath = relative(
     getDistDir(stencilProjectConfig.root),
     angularProjectConfig.root,
