@@ -94,12 +94,6 @@ function addReactOutputTarget(
     `react-${projectName}`,
   );
 
-  reactProjectConfig.targets.build.dependsOn = [
-    {
-      target: 'build',
-      projects: 'dependencies',
-    },
-  ];
   reactProjectConfig.targets.build.options.external.push('react', 'react-dom');
   updateProjectConfiguration(tree, `react-${projectName}`, reactProjectConfig);
 

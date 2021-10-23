@@ -8,7 +8,6 @@ import {
   names,
   readProjectConfiguration,
   Tree,
-  updateProjectConfiguration,
 } from '@nrwl/devkit';
 import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
 import { calculateStencilSourceOptions } from '@nxext/stencil/src/generators/add-outputtarget/lib/calculate-stencil-source-options';
@@ -107,18 +106,6 @@ function addAngularOutputTarget(
   const angularProjectConfig = readProjectConfiguration(
     host,
     `angular-${projectName}`,
-  );
-
-  angularProjectConfig.targets.build.dependsOn = [
-    {
-      target: 'build',
-      projects: 'dependencies',
-    },
-  ];
-  updateProjectConfiguration(
-    host,
-    `angular-${projectName}`,
-    angularProjectConfig,
   );
 
   const relativePath = relative(
