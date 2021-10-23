@@ -112,7 +112,7 @@ function addAngularOutputTarget(
   angularProjectConfig.implicitDependencies = [projectName];
   updateProjectConfiguration(
     host,
-    `react-${projectName}`,
+    `angular-${projectName}`,
     angularProjectConfig,
   );
 
