@@ -1,23 +1,9 @@
 import { libraryGenerator } from '@nrwl/angular/generators';
-import {
-  addDependenciesToPackageJson,
-  applyChangesToString,
-  formatFiles,
-  generateFiles,
-  getWorkspaceLayout,
-  joinPathFragments,
-  names,
-  readProjectConfiguration,
-  Tree,
-  updateProjectConfiguration,
-} from '@nrwl/devkit';
+import { addDependenciesToPackageJson, applyChangesToString, formatFiles, generateFiles, getWorkspaceLayout, joinPathFragments, names, readProjectConfiguration, Tree, updateProjectConfiguration } from '@nrwl/devkit';
 import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
 import { calculateStencilSourceOptions } from '@nxext/stencil/src/generators/add-outputtarget/lib/calculate-stencil-source-options';
 import { addOutputTarget } from '@nxext/stencil/src/stencil-core-utils';
-import {
-  addImport,
-  readTsSourceFile,
-} from '@nxext/stencil/src/utils/ast-utils';
+import { addImport, readTsSourceFile } from '@nxext/stencil/src/utils/ast-utils';
 import { getDistDir } from '@nxext/stencil/src/utils/fileutils';
 import { addToGitignore } from '@nxext/stencil/src/utils/utillities';
 import { STENCIL_OUTPUTTARGET_VERSION } from '@nxext/stencil/src/utils/versions';
@@ -160,11 +146,11 @@ function createStory(tree: Tree, schema: GramenerAngularLibrarySchema): void {
   generateFiles(
     tree,
     joinPathFragments(__dirname, './files'),
-    joinPathFragments(`${projectConfig.sourceRoot}/stories`),
+    joinPathFragments(projectConfig.root, 'stories'),
     {
       componentFileName: names(schema.project).fileName,
       className: names(schema.project).className,
-      moduleName: (names(schema.project).className = 'Module'),
+      moduleName: names(schema.project).className + 'Module',
       libraryPath: `@gramener-angular/${schema.project}`,
     },
   );

@@ -9,7 +9,7 @@ export default {
 const DefaultStory: Story<<%= className %>> = (args: <%= className %>) => ({
   component: <%= className %>,
   moduleMetadata: {
-    imports: [%= moduleName %>],
+    imports: [<%= moduleName %>],
   },
   props: args,
 });
