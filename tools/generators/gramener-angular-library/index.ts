@@ -152,6 +152,7 @@ function createStory(tree: Tree, schema: GramenerAngularLibrarySchema): void {
       className: names('gramener-' + schema.project).className,
       moduleName: names(schema.project).className + 'Module',
       libraryPath: `@gramener-angular/${schema.project}`,
+      tagName: names('gramener-' + schema.project).name
     },
   );
 }

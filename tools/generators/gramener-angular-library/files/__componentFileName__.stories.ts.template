@@ -1,16 +1,17 @@
 import { Story } from '@storybook/angular';
-import { <%= moduleName %>, <%= className %> } from '<%= libraryPath %>';
+import { <%= moduleName %> } from '<%= libraryPath %>';
 
 export default {
-  title: 'Components/<%= className %>',
-  component: <%= className %>,
+  title: 'Components/<%= className %>'
 };
 
-const DefaultStory: Story<<%= className %>> = (args: <%= className %>) => ({
-  component: <%= className %>,
+interface StoryArgs {}
+
+const DefaultStory: Story = (args: StoryArgs) => ({
   moduleMetadata: {
     imports: [<%= moduleName %>],
   },
+  template: `<<%= tagName %>></<%= tagName %>>`
   props: args,
 });
 
