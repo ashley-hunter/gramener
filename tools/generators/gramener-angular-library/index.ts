@@ -3,6 +3,7 @@ import {
   addDependenciesToPackageJson,
   applyChangesToString,
   formatFiles,
+  generateFiles,
   getWorkspaceLayout,
   joinPathFragments,
   names,
@@ -94,6 +95,8 @@ async function createAngularLibrary(
   );
 
   addToGitignore(host, `${libsDir}/${angularProjectName}/**/generated`);
+
+  createStory(host, schema);
 }
 
 function addAngularOutputTarget(
@@ -148,5 +151,21 @@ function addAngularOutputTarget(
     stencilConfigSource,
     stencilConfigPath,
     'const angularValueAccessorBindings: ValueAccessorConfig[] = [];',
+  );
+}
+
+function createStory(tree: Tree, schema: GramenerAngularLibrarySchema): void {
+  const projectConfig = readProjectConfiguration(tree, 'angular-storybook');
+
+  generateFiles(
+    tree,
+    joinPathFragments(__dirname, './files'),
+    joinPathFragments(`${projectConfig.sourceRoot}/stories`),
+    {
+      componentFileName: names(schema.project).fileName,
+      className: names(schema.project).className,
+      moduleName: (names(schema.project).className = 'Module'),
+      libraryPath: `@gramener-angular/${schema.project}`,
+    },
   );
 }
