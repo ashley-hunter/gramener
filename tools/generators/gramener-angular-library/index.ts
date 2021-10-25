@@ -1,5 +1,5 @@
 import { libraryGenerator } from '@nrwl/angular/generators';
-import { addDependenciesToPackageJson, applyChangesToString, formatFiles, generateFiles, getWorkspaceLayout, joinPathFragments, names, readProjectConfiguration, Tree, updateProjectConfiguration } from '@nrwl/devkit';
+import { addDependenciesToPackageJson, applyChangesToString, formatFiles, getWorkspaceLayout, joinPathFragments, names, readProjectConfiguration, Tree, updateProjectConfiguration } from '@nrwl/devkit';
 import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
 import { calculateStencilSourceOptions } from '@nxext/stencil/src/generators/add-outputtarget/lib/calculate-stencil-source-options';
 import { addOutputTarget } from '@nxext/stencil/src/stencil-core-utils';
@@ -81,8 +81,6 @@ async function createAngularLibrary(
   );
 
   addToGitignore(host, `${libsDir}/${angularProjectName}/**/generated`);
-
-  createStory(host, schema);
 }
 
 function addAngularOutputTarget(
@@ -137,22 +135,5 @@ function addAngularOutputTarget(
     stencilConfigSource,
     stencilConfigPath,
     'const angularValueAccessorBindings: ValueAccessorConfig[] = [];',
-  );
-}
-
-function createStory(tree: Tree, schema: GramenerAngularLibrarySchema): void {
-  const projectConfig = readProjectConfiguration(tree, 'angular-storybook');
-
-  generateFiles(
-    tree,
-    joinPathFragments(__dirname, './files'),
-    joinPathFragments(projectConfig.root, 'stories'),
-    {
-      componentFileName: names(schema.project).fileName,
-      storyName: schema.project.split('-').map(part => names(part).className).join(' '),
-      moduleName: names(schema.project).className + 'Module',
-      libraryPath: `@gramener-angular/${schema.project}`,
-      tagName: names('gramener-' + schema.project).name
-    },
   );
 }
