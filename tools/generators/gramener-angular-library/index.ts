@@ -1,9 +1,22 @@
 import { libraryGenerator } from '@nrwl/angular/generators';
-import { addDependenciesToPackageJson, applyChangesToString, formatFiles, getWorkspaceLayout, joinPathFragments, names, readProjectConfiguration, Tree, updateProjectConfiguration } from '@nrwl/devkit';
+import {
+  addDependenciesToPackageJson,
+  applyChangesToString,
+  formatFiles,
+  getWorkspaceLayout,
+  joinPathFragments,
+  names,
+  readProjectConfiguration,
+  Tree,
+  updateProjectConfiguration,
+} from '@nrwl/devkit';
 import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
 import { calculateStencilSourceOptions } from '@nxext/stencil/src/generators/add-outputtarget/lib/calculate-stencil-source-options';
 import { addOutputTarget } from '@nxext/stencil/src/stencil-core-utils';
-import { addImport, readTsSourceFile } from '@nxext/stencil/src/utils/ast-utils';
+import {
+  addImport,
+  readTsSourceFile,
+} from '@nxext/stencil/src/utils/ast-utils';
 import { getDistDir } from '@nxext/stencil/src/utils/fileutils';
 import { addToGitignore } from '@nxext/stencil/src/utils/utillities';
 import { STENCIL_OUTPUTTARGET_VERSION } from '@nxext/stencil/src/utils/versions';
@@ -80,7 +93,7 @@ async function createAngularLibrary(
     'defineCustomElements(window);',
   );
 
-  addToGitignore(host, `${libsDir}/${angularProjectName}/**/generated`);
+  addToGitignore(host, `${libsDir}/angular/${schema.project}/**/generated`);
 }
 
 function addAngularOutputTarget(
@@ -120,6 +133,11 @@ function addAngularOutputTarget(
     ...addOutputTarget(
       stencilConfigSource,
       `
+      {
+        type: 'docs-readme',
+        strict: true,
+        footer: '',
+      },
       angularOutputTarget({
           componentCorePackage: '${packageName}',
           directivesProxyFile: '${proxyPath}',

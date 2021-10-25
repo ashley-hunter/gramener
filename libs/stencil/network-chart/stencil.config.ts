@@ -1,13 +1,11 @@
-import { Config } from '@stencil/core';
-
-const angularValueAccessorBindings: ValueAccessorConfig[] = [];
-
 import {
   angularOutputTarget,
   ValueAccessorConfig,
 } from '@stencil/angular-output-target';
-
+import { Config } from '@stencil/core';
 import { reactOutputTarget } from '@stencil/react-output-target';
+
+const angularValueAccessorBindings: ValueAccessorConfig[] = [];
 
 export const config: Config = {
   namespace: 'network-chart',
@@ -22,6 +20,11 @@ export const config: Config = {
       type: 'www',
       dir: '../../../dist/libs/stencil/network-chart/www',
       serviceWorker: null, // disable service workers
+    },
+    {
+      type: 'docs-readme',
+      strict: true,
+      footer: '',
     },
 
     angularOutputTarget({
