@@ -2,7 +2,7 @@ import { Story } from '@storybook/angular';
 import { <%= moduleName %> } from '<%= libraryPath %>';
 
 export default {
-  title: 'Components/<%= className %>'
+  title: 'Components/<%= storyName %>'
 };
 
 interface StoryArgs {}
