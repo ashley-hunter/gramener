@@ -149,7 +149,7 @@ function createStory(tree: Tree, schema: GramenerAngularLibrarySchema): void {
     joinPathFragments(projectConfig.root, 'stories'),
     {
       componentFileName: names(schema.project).fileName,
-      className: names(schema.project).className,
+      className: names('gramener-' + schema.project).className,
       moduleName: names(schema.project).className + 'Module',
       libraryPath: `@gramener-angular/${schema.project}`,
     },
