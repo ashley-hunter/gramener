@@ -11,7 +11,7 @@ const DefaultStory: Story = (args: StoryArgs) => ({
   moduleMetadata: {
     imports: [<%= moduleName %>],
   },
-  template: `<<%= tagName %>></<%= tagName %>>`
+  template: `<<%= tagName %>></<%= tagName %>>`,
   props: args,
 });
 
