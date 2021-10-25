@@ -1,0 +1,43 @@
+{
+  "projectType": "library",
+  "root": "libs/angular/network-chart",
+  "sourceRoot": "libs/angular/network-chart/src",
+  "prefix": "gramener",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/angular/network-chart"],
+      "options": {
+        "project": "libs/angular/network-chart/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/angular/network-chart/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/angular/network-chart/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/angular/network-chart"],
+      "options": {
+        "jestConfig": "libs/angular/network-chart/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/network-chart/src/**/*.ts",
+          "libs/angular/network-chart/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["network-chart"]
+}

@@ -37,3 +37,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+libs/angular-network-chart/**/generated
+libs/react/network-chart/**/generated

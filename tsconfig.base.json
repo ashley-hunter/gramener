@@ -14,7 +14,21 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@gramener-angular/network-chart": [
+        "libs/angular/network-chart/src/index.ts"
+      ],
+      "@gramener-react/network-chart": [
+        "libs/react/network-chart/src/index.ts"
+      ],
+      "@gramener/network-chart": ["dist/libs/stencil/network-chart"],
+      "@gramener/network-chart/loader": [
+        "dist/libs/stencil/network-chart/loader"
+      ],
+      "@gramener/stencil/network-chart": [
+        "libs/stencil/network-chart/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

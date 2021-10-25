@@ -1,5 +1,8 @@
 {
   "version": 2,
   "projects": {
+    "angular-network-chart": "libs/angular/network-chart",
+    "network-chart": "libs/stencil/network-chart",
+    "react-network-chart": "libs/react/network-chart"
   }
 }

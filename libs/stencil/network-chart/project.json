@@ -1,0 +1,53 @@
+{
+  "root": "libs/stencil/network-chart",
+  "sourceRoot": "libs/stencil/network-chart/src",
+  "projectType": "library",
+  "generators": {
+    "@nxext/stencil:component": {
+      "style": "css"
+    }
+  },
+  "tags": ["stencil"],
+  "targets": {
+    "test": {
+      "executor": "@nxext/stencil:test",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "projectType": "library",
+        "tsConfig": "libs/stencil/network-chart/tsconfig.lib.json",
+        "configPath": "libs/stencil/network-chart/stencil.config.ts",
+        "outputPath": "dist/libs/stencil/network-chart"
+      }
+    },
+    "build": {
+      "executor": "@nxext/stencil:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "projectType": "library",
+        "tsConfig": "libs/stencil/network-chart/tsconfig.lib.json",
+        "configPath": "libs/stencil/network-chart/stencil.config.ts",
+        "outputPath": "dist/libs/stencil/network-chart"
+      },
+      "configurations": {
+        "production": {
+          "dev": false,
+          "prod": true
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nxext/stencil:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "projectType": "library",
+        "tsConfig": "libs/stencil/network-chart/tsconfig.lib.json",
+        "configPath": "libs/stencil/network-chart/stencil.config.ts",
+        "outputPath": "dist/libs/stencil/network-chart",
+        "serve": true,
+        "watch": true,
+        "dev": true,
+        "debug": true
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "root": "libs/react/network-chart",
+  "sourceRoot": "libs/react/network-chart/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:package",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/react/network-chart",
+        "tsConfig": "libs/react/network-chart/tsconfig.lib.json",
+        "project": "libs/react/network-chart/package.json",
+        "entryFile": "libs/react/network-chart/src/index.ts",
+        "external": ["react/jsx-runtime", "react", "react-dom"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "assets": [
+          {
+            "glob": "libs/react/network-chart/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/react/network-chart/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/react/network-chart"],
+      "options": {
+        "jestConfig": "libs/react/network-chart/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "implicitDependencies": ["network-chart"]
+}
