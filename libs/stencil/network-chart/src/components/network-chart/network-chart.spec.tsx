@@ -5,14 +5,14 @@ describe('network-chart', () => {
   it('renders', async () => {
     const { root } = await newSpecPage({
       components: [NetworkChart],
-      html: '<network-chart></network-chart>',
+      html: '<gramener-network-chart></gramener-network-chart>',
     });
     expect(root).toEqualHtml(`
-      <network-chart>
+      <gramener-network-chart>
         <mock:shadow-root>
           <div>Hello, World!</div>
         </mock:shadow-root>
-      </network-chart>
+      </gramener-network-chart>
     `);
   });
 });
